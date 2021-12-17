@@ -1,4 +1,4 @@
-# CryptoProject
+# CryonPlace
 
 Projeto para Programação Web Cliente.
 
@@ -24,4 +24,10 @@ Projeto para Programação Web Cliente.
 | **Barra de Pesquisa**                  |              |
 | Todas as páginas com barra de pesquisa |              |
 
-## Funcionalidades
+## Alunos
+
+| Nome                                   | Número Aluno |
+|----------------------------------------|:------------:|
+| **João Bento**                         | 2211917      |
+| **Luís Francisco**                     | 2211911      |
+| **Renato Campos**                      | 2211915      |
