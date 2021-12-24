@@ -1,8 +1,11 @@
 // link da API
 const url = "https://api.coingecko.com/api/v3";
 
-// Função que vai fazer um pedido a API.
-// passar por param o que queremos pesquisar.
+/**
+ * Fazer um pedido a API.
+ * @param {string} param Endpoint do que se pretende pesquisar.
+ * @return {JSON} Caso o pedido seja bem sucedido vai retornar um JSON caso contrário o valor será nulo.
+ */
 async function request(param) {
     let value = null;
 
