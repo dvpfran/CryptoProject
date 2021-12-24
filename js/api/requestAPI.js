@@ -31,6 +31,15 @@ async function request(param) {
  * @param {number} quantity Número de moedas a pesquisar. Por defeito é 100.
  * @return {JSON} Caso o pedido seja bem sucedido vai retornar um JSON caso contrário o valor será nulo.
  */
- async function getCoins(quantity = 100) {
-    return await request(`coins?per_page=${quantity}`);
+function getCoins(quantity = 100) {
+    return request(`coins?per_page=${quantity}`);
+}
+
+/**
+ * Obter informação de uma moeda conforme o id passado por param.
+ * @param {string} id Id da moeda.
+ * @return {JSON} Caso o pedido seja bem sucedido vai retornar um JSON com a informação da moeda.
+ */
+function getCoin(id) {
+    return request(`coins/${id}`);
 }
