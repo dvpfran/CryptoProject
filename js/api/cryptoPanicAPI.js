@@ -1,18 +1,18 @@
-// link da API
-const url = "https://api.coingecko.com/api/v3";
+// API para obter notícias das moedas.
+const url_cryptopanic = "http://cryptopanichelper.ddns.net/CryptoPanic";
 
 /**
  * Fazer um pedido a API.
  * @param {string} param Endpoint do que se pretende pesquisar.
  * @return {JSON} Caso o pedido seja bem sucedido vai retornar um JSON caso contrário o valor será nulo.
  */
-async function request(param) {
+async function requestCryptoPanic(param) {
     let value = null;
 
     // o fetch é que vai fazer o pedido.
     // url - o que está declarado na primeira linha.
     // param - o valor que foi passado por parametro do queremos pesquisar.
-    await fetch(`${url}/${param}`, {
+    await fetch(`${url_cryptopanic}?${param}`, {
         // configurações do pedido.
         method: "GET",
         headers: {
@@ -27,19 +27,18 @@ async function request(param) {
 }
 
 /**
- * Pedido para obter a informação das moedas.
- * @param {number} quantity Número de moedas a pesquisar. Por defeito é 100.
+ * Vai fazer um pedido para obter as últimas notícias gerais.
  * @return {JSON} Caso o pedido seja bem sucedido vai retornar um JSON caso contrário o valor será nulo.
  */
-function getCoins(quantity = 100) {
-    return request(`coins?per_page=${quantity}`);
+async function getNews() {
+    return await requestCryptoPanic("kind=news");
 }
 
 /**
- * Obter informação de uma moeda conforme o id passado por param.
- * @param {string} id Id da moeda.
- * @return {JSON} Caso o pedido seja bem sucedido vai retornar um JSON com a informação da moeda.
+ * Vai fazer um pedido para obter as notícias da moeda selecionada.
+ * @param {string} symbol Símbolo da moeda selecionada. Exemplo: btc, eth.
+ * @return {JSON} Caso o pedido seja bem sucedido vai retornar uma lista com as notícias relacionadas à moeda passada por parâmetro.
  */
-function getCoin(id) {
-    return request(`coins/${id}`);
+async function getNewsBySymbolCoin(symbol) {
+    return await requestCryptoPanic(`currencies=${symbol}`);
 }
