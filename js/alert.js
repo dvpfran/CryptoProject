@@ -52,11 +52,19 @@ function addAlert(id, coinId, minValue, maxValue) {
  function loadAlertsFromLocalStorage() {
     let stringAlerts = localStorage.getItem(ALERTS);
     if (stringAlerts != "") {
+        alerts = [];
         // Converte a string do localStorage para um JSON.
         // Depois vai percorrer a lista para transformar cada JSON num Alert.
         let jsonAlerts = JSON.parse(stringAlerts);
         for (let index = 0; index < jsonAlerts.length; index++) {
-            alerts.push(new Alert(jsonAlerts[index]));
+            alerts.push(new Alert(
+                jsonAlerts[index].id,
+                jsonAlerts[index].coinId,
+                jsonAlerts[index].minValue,
+                jsonAlerts[index].maxValue,
+                jsonAlerts[index].isDispatch,
+                jsonAlerts[index].isSeen
+            ));
         }
     }
 }
