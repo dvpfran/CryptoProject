@@ -40,9 +40,32 @@ function addAlert(id, coinId, minValue, maxValue) {
     if (!alerts) {
         loadAlertsFromLocalStorage();
     }
+    
+    let alert = new Alert(id, coinId, minValue, maxValue, false, false);
+    if (isAlertValid(alert)) {
+        alerts.push(alert);
+        saveAlertsToLocalStorage();
+    }
+}
 
-    alerts.push(new Alert(id, coinId, minValue, maxValue, false, false));
-    saveAlertsToLocalStorage();
+/**
+ * Verifica se o alerta passdo por parâmetro é válido.
+ * @param {Alert} alert
+ * @return {bool} Vai retornar falso se o valor mínimo for maior que o valor máximo.
+ * @return {bool} Vai retornar falso se já existir uma alerta com as configurações iguais.
+ */
+function isAlertValid(alert) {
+    if (alert.minValue > alert.maxValue)
+        return false;
+
+    if (alerts.some(x =>
+        x.coinId == alert.coinId && 
+        x.minValue == alert.minValue && 
+        x.maxValue == alert.maxValue)) {
+            return false;
+        }
+
+    return true;
 }
 
 /**
