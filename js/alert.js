@@ -36,8 +36,29 @@ let alerts = [];
  * @param {bool} isSeen  Propriedade para verificar se o alerta já foi visto pelo utilizador.
 */
 function addAlert(id, coinId, minValue, maxValue) {
+    // Carrega a lista no caso do array ainda não ter sido inicializado.
+    if (!alerts) {
+        loadAlertsFromLocalStorage();
+    }
+
     alerts.push(new Alert(id, coinId, minValue, maxValue, false, false));
     saveAlertsToLocalStorage();
+}
+
+
+/**
+ * Vai carregar os dados dos alertas configurados que estão no local storage.
+ */
+ function loadAlertsFromLocalStorage() {
+    let stringAlerts = localStorage.getItem(ALERTS);
+    if (stringAlerts != "") {
+        // Converte a string do localStorage para um JSON.
+        // Depois vai percorrer a lista para transformar cada JSON num Alert.
+        let jsonAlerts = JSON.parse(stringAlerts);
+        for (let index = 0; index < jsonAlerts.length; index++) {
+            alerts.push(new Alert(jsonAlerts[index]));
+        }
+    }
 }
 
 /** 
