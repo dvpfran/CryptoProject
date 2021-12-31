@@ -45,11 +45,28 @@ function addAlert(id, coinId, minValue, maxValue) {
     saveAlertsToLocalStorage();
 }
 
+/**
+ * Vai remover um alerta conforme o Id passado por parâmetro.
+ * @param {number} id Id do alerta.
+ */
+function removeAlert(id) {
+    if (!alerts) {
+        loadAlertsFromLocalStorage();
+    }
+
+    // No do id passado por parâmetro existir
+    // O valor do index vai ser diferente de -1.
+    let indexAlert = alerts.indexOf(alerts.find(x => x.id == id));
+    if (indexAlert != -1) {
+        alerts.splice(indexAlert, 1);
+        saveAlertsToLocalStorage();
+    }
+}
 
 /**
  * Vai carregar os dados dos alertas configurados que estão no local storage.
  */
- function loadAlertsFromLocalStorage() {
+function loadAlertsFromLocalStorage() {
     let stringAlerts = localStorage.getItem(ALERTS);
     if (stringAlerts != "") {
         alerts = [];
