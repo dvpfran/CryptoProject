@@ -3,7 +3,43 @@
     <head>
         <title>CryonPlace</title>
     </head>
-    <body>
+    <script> // SCRIPT TEMPORARIA
 
+        let exemploDados = [ 
+        {rank: 1, modeda: "Bicoin", preco: "5.0000", h: "x"},
+        {rank: 2, modeda: "Etherium", preco: "4.000", h: "x"},
+        {rank: 3, modeda: "Doge", preco: "0.10", h: "x"},
+        {rank: 4, modeda: "Shiba", preco: "0.17", h: "x"} ];
+
+        window.onload = () => {
+            dadosTabela(exemploDados)
+        }
+
+       function dadosTabela(exemploDados){
+
+            let tabela = document.getElementById("Dados");
+            let tabelaHtml = "";
+
+            for(let dados of exemploDados){
+
+                tabelaHtml += `<tr><td>${dados.rank}</td> <td>${dados.modeda}</td> 
+                    <td>${dados.preco}</td> <td>${dados.h}</td></tr>`;
+
+            }
+            tabela.innerHTML = tabelaHtml;
+       }
+    </script> <!--SCRIPT TEMPORARIA--> 
+    <body>
+            <table>
+                <thead>
+                    <tr style="font-size: 20px;">
+                        <th>Ranking</th>
+                        <th>Moeda</th>
+                        <th>Preço</th>
+                        <th>24 Horas</th>
+                    </tr>
+                </thead>
+                <tbody id="Dados"></tbody>
+            </table>
     </body>
 </html>
