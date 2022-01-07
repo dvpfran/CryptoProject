@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>CryonPlace</title>
-        <script src="js\api\coinGeckoAPI.js"></script>
-        <script> // SCRIPT TEMPORARIA
 
-            window.onload = async() => {
-    
-                let coins = await getCoins();
-                dadosTabela(coins);
-    
+<head>
+    <title>CryonPlace</title>
+    <script src="js\api\coinGeckoAPI.js"></script>
+    <script src="js\favorites.js"></script>
+    <script> // SCRIPT TEMPORARIA
+
+        window.onload = async () => {
+
+            let coins = await getCoins();
+            dadosTabela(coins);
+
+        }
+
+        function dadosTabela(coins) {
+
+            let tabela = document.getElementById("Dados");
+            let tabelaHtml = "";
+
+            for (let coin of coins) {
+
+                tabelaHtml += `<tr><td>${coin.market_data.market_cap_rank}</td><td>${coin.name}</td> 
+                        <td>${coin.market_data.current_price.usd}</td><td>${coin.market_data.price_change_24h}
+                            </td><td><button onClick="addToFavorites('${coin.id}')">fav</button></td></tr>`;
+
             }
-    
-           function dadosTabela(coins){
-    
-                let tabela = document.getElementById("Dados");
-                let tabelaHtml = "";
-    
-                for(let coin of coins){
-    
-                    tabelaHtml += `<tr><td>${coin.market_data.market_cap_rank}</td><td>${coin.name}</td> 
-                        <td>${coin.market_data.current_price.usd}</td><td>${coin.market_data.price_change_24h}</td></tr>`;
-    
-                }
-                tabela.innerHTML = tabelaHtml;
-           }
-        </script> <!--SCRIPT TEMPORARIA--> 
-    </head>
+            tabela.innerHTML = tabelaHtml;
+        }
+    </script>
+    <!--SCRIPT TEMPORARIA-->
+</head>
 
-    <body>
-            <table>
-                <thead>
-                    <tr style="font-size: 20px;">
-                        <th>Ranking</th>
-                        <th>Moeda</th>
-                        <th>Preço</th>
-                        <th>24 Horas</th>
-                    </tr>
-                </thead>
-                <tbody id="Dados"></tbody>
-            </table>
-    </body>
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr style="font-size: 20px;">
+                    <th>Ranking</th>
+                    <th>Moeda</th>
+                    <th>Preço</th>
+                    <th>24 Horas</th>
+                </tr>
+            </thead>
+            <tbody id="Dados"></tbody>
+        </table>
+    </div>
+
+</body>
+
 </html>
