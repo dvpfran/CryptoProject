@@ -2,33 +2,32 @@
 <html>
     <head>
         <title>CryonPlace</title>
-    </head>
-    <script> // SCRIPT TEMPORARIA
+        <script src="js\api\coinGeckoAPI.js"></script>
+        <script> // SCRIPT TEMPORARIA
 
-        let exemploDados = [ 
-        {rank: 1, modeda: "Bicoin", preco: "5.0000", h: "x"},
-        {rank: 2, modeda: "Etherium", preco: "4.000", h: "x"},
-        {rank: 3, modeda: "Doge", preco: "0.10", h: "x"},
-        {rank: 4, modeda: "Shiba", preco: "0.17", h: "x"} ];
-
-        window.onload = () => {
-            dadosTabela(exemploDados)
-        }
-
-       function dadosTabela(exemploDados){
-
-            let tabela = document.getElementById("Dados");
-            let tabelaHtml = "";
-
-            for(let dados of exemploDados){
-
-                tabelaHtml += `<tr><td>${dados.rank}</td> <td>${dados.modeda}</td> 
-                    <td>${dados.preco}</td> <td>${dados.h}</td></tr>`;
-
+            window.onload = async() => {
+    
+                let coins = await getCoins();
+                dadosTabela(coins);
+    
             }
-            tabela.innerHTML = tabelaHtml;
-       }
-    </script> <!--SCRIPT TEMPORARIA--> 
+    
+           function dadosTabela(coins){
+    
+                let tabela = document.getElementById("Dados");
+                let tabelaHtml = "";
+    
+                for(let coin of coins){
+    
+                    tabelaHtml += `<tr><td>${coin.market_data.market_cap_rank}</td><td>${coin.name}</td> 
+                        <td>${coin.market_data.current_price.usd}</td><td>${coin.market_data.price_change_24h}</td></tr>`;
+    
+                }
+                tabela.innerHTML = tabelaHtml;
+           }
+        </script> <!--SCRIPT TEMPORARIA--> 
+    </head>
+
     <body>
             <table>
                 <thead>
