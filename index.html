@@ -5,13 +5,22 @@
     <title>CryonPlace</title>
     <script src="js\api\coinGeckoAPI.js"></script>
     <script src="js\favorites.js"></script>
-    <script> // SCRIPT TEMPORARIA
+    <script>
 
         window.onload = async () => {
 
             let coins = await getCoins();
             dadosTabela(coins);
+        }
 
+        function Favoritos(coinId) {
+
+            if(favoriteCoins.includes(coinId)){
+                removeFromFavorites(coinId);
+            }
+            else{
+                addToFavorites(coinId);
+            }
         }
 
         function dadosTabela(coins) {
@@ -23,13 +32,12 @@
 
                 tabelaHtml += `<tr><td>${coin.market_data.market_cap_rank}</td><td>${coin.name}</td> 
                         <td>${coin.market_data.current_price.usd}</td><td>${coin.market_data.price_change_24h}
-                            </td><td><button onClick="addToFavorites('${coin.id}')">fav</button></td></tr>`;
+                            </td><td><button onClick="Favoritos('${coin.id}')">fav</button></td></tr>`;
 
             }
             tabela.innerHTML = tabelaHtml;
         }
     </script>
-    <!--SCRIPT TEMPORARIA-->
 </head>
 
 <body>
