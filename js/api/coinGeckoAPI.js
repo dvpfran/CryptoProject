@@ -28,7 +28,7 @@ async function requestCoinGecko(param) {
 
 /**
  * Pedido para obter todas as moedas que a API pode retornar.
- * @return {JSON[]} Caso o pedido seja bem sucedido vai retorna uma lista com todas as moedas.
+ * @return {JSON[]} Caso o pedido seja bem sucedido vai retornar uma lista com o [id], [name] e [symbol] de todas as moedas.
  */
 async function getAllCoins() {
     return await requestCoinGecko("coins/list");
