@@ -8,7 +8,7 @@ let favoriteCoins = [];
  */
 function addToFavorites(coinId) {
     // Vai carregar a lista no caso do array ainda não ter sido iniciado.
-    if (!favoriteCoins) {
+    if (favoriteCoins.length == 0) {
         loadFavoriteCoinsFromLocalStorage();
     }
 
@@ -25,7 +25,7 @@ function addToFavorites(coinId) {
  */
 function removeFromFavorites(coinId) {
     // Vai carregar a lista no caso do array ainda não ter sido iniciado.
-    if (!favoriteCoins) {
+    if (favoriteCoins.length == 0) {
         loadFavoriteCoinsFromLocalStorage();
     }
 

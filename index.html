@@ -5,26 +5,45 @@
     <title>CryonPlace</title>
     <script src="js\api\coinGeckoAPI.js"></script>
     <script src="js\favorites.js"></script>
+    <script src="js\searchBar.js"></script>
     <script>
 
         window.onload = async () => {
-
+            loadFavoriteCoinsFromLocalStorage();
+            allCoins = await getAllCoins();
             let coins = await getCoins();
             dadosTabela(coins);
+            Pesquisa(allCoins);
         }
 
-        function Favoritos(coinId) {
+        function Pesquisa(allCoins) {
+            let lista = document.getElementById("lista");
+            let listaHtml = "";
 
-            if(favoriteCoins.includes(coinId)){
-                removeFromFavorites(coinId);
-            }
-            else{
-                addToFavorites(coinId);
-            }
+            document.getElementById("barraPesquisa").addEventListener("keyup", async (e) => {
+
+                let dataListOptions = document.getElementById("lista");
+                dataListOptions.innerHTML = "";
+
+                let filteredCoins = await getSearchResults(e);
+
+                let counter = 0;
+                for (let index = 0; index < filteredCoins.length; index++) {
+
+                        setTimeout(() => {
+                            let optionData = document.createElement("option");
+                            optionData.value = filteredCoins[index].id;
+                            optionData.innerHTML = filteredCoins[index].name;
+                            dataListOptions.append(optionData);
+                        }, 20);
+                        counter = 0;
+                    
+                    counter++;
+                }
+            });
         }
 
         function dadosTabela(coins) {
-
             let tabela = document.getElementById("Dados");
             let tabelaHtml = "";
 
@@ -37,10 +56,25 @@
             }
             tabela.innerHTML = tabelaHtml;
         }
+
+        function Favoritos(coinId) {
+            if (favoriteCoins.includes(coinId)) {
+                removeFromFavorites(coinId);
+            }
+            else {
+                addToFavorites(coinId);
+            }
+        }
+
     </script>
 </head>
 
 <body>
+    <div>
+        <input id="barraPesquisa" list="lista" placeholder="Pesquisar">
+        <datalist id="lista">
+        </datalist>
+    </div>
     <div>
         <table>
             <thead>
