@@ -18,7 +18,6 @@
 
         function Pesquisa(allCoins) {
             let lista = document.getElementById("lista");
-            let listaHtml = "";
 
             document.getElementById("barraPesquisa").addEventListener("keyup", async (e) => {
 
@@ -27,34 +26,38 @@
 
                 let filteredCoins = await getSearchResults(e);
 
-                let counter = 0;
                 for (let index = 0; index < filteredCoins.length; index++) {
 
-                        setTimeout(() => {
-                            let optionData = document.createElement("option");
-                            optionData.value = filteredCoins[index].id;
-                            optionData.innerHTML = filteredCoins[index].name;
-                            dataListOptions.append(optionData);
-                        }, 20);
-                        counter = 0;
-                    
-                    counter++;
+                    setTimeout(() => {
+                        let optionData = document.createElement("option");
+                        optionData.value = filteredCoins[index].id;
+                        optionData.innerHTML = filteredCoins[index].name;
+                        dataListOptions.append(optionData);
+                    }, 20);
                 }
             });
         }
 
         function dadosTabela(coins) {
             let tabela = document.getElementById("Dados");
-            let tabelaHtml = "";
 
-            for (let coin of coins) {
+            for (let index = 0; index < coins.length; index++) {
 
-                tabelaHtml += `<tr><td>${coin.market_data.market_cap_rank}</td><td>${coin.name}</td> 
-                        <td>${coin.market_data.current_price.usd}</td><td>${coin.market_data.price_change_24h}
-                            </td><td><button onClick="Favoritos('${coin.id}')">fav</button></td></tr>`;
+                let trData = document.createElement("tr");
+                trData.innerHTML = "";
+                let tdRank = document.createElement("td");
+                tdRank.innerHTML = coins[index].market_data.market_cap_rank;
+                let tdCoin = document.createElement("td");
+                tdCoin.innerHTML = coins[index].name;
+                let tdPrice = document.createElement("td");
+                tdPrice.innerHTML = coins[index].market_data.current_price.usd;
+                let tdHours = document.createElement("td");
+                tdHours.innerHTML = `<button onClick=Favoritos('${coins[index].id}')>fav</button></td>`;
+
+                tabela.append(trData);
+                trData.append(tdRank, tdCoin, tdPrice, tdHours);
 
             }
-            tabela.innerHTML = tabelaHtml;
         }
 
         function Favoritos(coinId) {
