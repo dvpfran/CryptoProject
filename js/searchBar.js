@@ -17,6 +17,7 @@ async function getSearchResults(event) {
             coinsResult = getFilteredCoins(filter);
         }
     }
+    return coinsResult;
 }
 
 /**
