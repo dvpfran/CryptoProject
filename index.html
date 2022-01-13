@@ -30,8 +30,7 @@
 
                     setTimeout(() => {
                         let optionData = document.createElement("option");
-                        optionData.value = filteredCoins[index].id;
-                        optionData.innerHTML = filteredCoins[index].name;
+                        optionData.value = filteredCoins[index].name;
                         dataListOptions.append(optionData);
                     }, 20);
                 }
@@ -52,10 +51,12 @@
                 let tdPrice = document.createElement("td");
                 tdPrice.innerHTML = coins[index].market_data.current_price.usd;
                 let tdHours = document.createElement("td");
-                tdHours.innerHTML = `<button onClick=Favoritos('${coins[index].id}')>fav</button></td>`;
+                tdHours.innerHTML = coins[index].market_data.price_change_24h;
+                let tdFavorites = document.createElement("td");
+                tdFavorites.innerHTML = `<button onClick=Favoritos('${coins[index].id}')>fav</button></td>`;
 
                 tabela.append(trData);
-                trData.append(tdRank, tdCoin, tdPrice, tdHours);
+                trData.append(tdRank, tdCoin, tdPrice, tdHours, tdFavorites);
 
             }
         }
