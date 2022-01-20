@@ -3,14 +3,14 @@ let allCoins = [];
 
 /**
  * Vai devolver uma lista conforme o que é escrito na caixa de texto.
- * @param {event} event Propriedades da caixa de texto.
+ * @param {string} filter Fitro do que é pretendido ser pesquisado.
  */
-async function getSearchResults(event) {
-    const filter = this.event.target.value.toLowerCase();
+async function getSearchResults(filter) {
     let coinsResult = [];
 
     // Se tiver vazio não vai fazer nada.
     if (filter != "") {
+        filter = filter.toLowerCase();
         // Verifica se existe alguma moeda com o filtro.
         // Vai passar o filtro com todas as letras minúsculas.
         if (isFilterValid(filter)) {
