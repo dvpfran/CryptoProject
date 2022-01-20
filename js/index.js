@@ -46,9 +46,12 @@ function dadosTabela(coins) {
 
         tabela.append(trData);
         trData.append(tdRank, tdCoin, tdPrice, tdHours);
-
     }
+
+    // Depois de os dados serem carregados remove o spinner.
+    document.getElementById("spinner-coins-table").remove();
 }
+
 
 function Favoritos(coinId) {
     if (favoriteCoins.includes(coinId)) {

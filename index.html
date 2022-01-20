@@ -19,17 +19,23 @@
             </datalist>
         </div>
         <div>
-            <table>
+            <table class="table table-sm">
                 <thead>
-                    <tr style="font-size: 20px;">
+                    <tr>
                         <th>Ranking</th>
                         <th>Moeda</th>
                         <th>Preço</th>
                         <th>24 Horas</th>
                     </tr>
                 </thead>
-                <tbody id="Dados"></tbody>
+                <tbody id="Dados">
+                </tbody>
             </table>
+            <div id="spinner-coins-table" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">A carregar dados...</span>
+                </div>
+            </div>
         </div>
     </body>
 </html>
