@@ -31,18 +31,26 @@ function Pesquisa(allCoins) {
 function dadosTabela(coins) {
     let tabela = document.getElementById("Dados");
 
+    console.log(coins[0]);
+
     for (let index = 0; index < coins.length; index++) {
 
         let trData = document.createElement("tr");
-        trData.innerHTML = "";
+
         let tdRank = document.createElement("td");
         tdRank.innerHTML = coins[index].market_data.market_cap_rank;
+        
         let tdCoin = document.createElement("td");
-        tdCoin.innerHTML = coins[index].name;
+        const img = createImage(`id-coin-${coins[index].id}`, "icon-coin-table", coins[index].image.small, coins[index].symbol);
+        const spanSymbol = createSpan("", "symbol-coin-table", coins[index].symbol);
+        const spanName = createSpan("", "name-coin-table", coins[index].name);
+        tdCoin.append(img, spanSymbol, spanName);
+        
         let tdPrice = document.createElement("td");
         tdPrice.innerHTML = coins[index].market_data.current_price.usd;
+        
         let tdHours = document.createElement("td");
-        tdHours.innerHTML = `<button onClick=Favoritos('${coins[index].id}')>fav</button></td>`;
+        tdHours.innerHTML = `<button onClick=favoritos('${coins[index].id}')>fav</button></td>`;
 
         tabela.append(trData);
         trData.append(tdRank, tdCoin, tdPrice, tdHours);
@@ -53,7 +61,7 @@ function dadosTabela(coins) {
 }
 
 
-function Favoritos(coinId) {
+function favoritos(coinId) {
     if (favoriteCoins.includes(coinId)) {
         removeFromFavorites(coinId);
     }

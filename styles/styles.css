@@ -1,0 +1,16 @@
+.icon-coin-table {
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+}
+
+.symbol-coin-table {
+    color: gray;
+    text-transform: uppercase;
+    margin-right: 15px;
+    font-size: 12px;
+}
+
+.name-coin-table {
+    font-weight: bold;
+}
