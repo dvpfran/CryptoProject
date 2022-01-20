@@ -34,14 +34,18 @@ function dadosTabela(coins) {
     console.log(coins[0]);
 
     for (let index = 0; index < coins.length; index++) {
-
-        let trData = document.createElement("tr");
-
-        let tdRank = document.createElement("td");
-        tdRank.innerHTML = coins[index].market_data.market_cap_rank;
+        const coinId = coins[index].id;       
         
+        let trData = document.createElement("tr");
+        let tdRank = document.createElement("td");
+        
+        const srcImgFavorite = favoriteCoins.includes(coinId) ? ICON_STAR_FILL : ICON_STAR;
+        let imgFavorite = createImage(`favorite-${coinId}-table`, "favorite-coin-table",  srcImgFavorite, "");
+        imgFavorite.addEventListener("click", () => favoritos(coinId), false);
+        tdRank.append(imgFavorite, coins[index].market_data.market_cap_rank);
+
         let tdCoin = document.createElement("td");
-        const img = createImage(`id-coin-${coins[index].id}`, "icon-coin-table", coins[index].image.small, coins[index].symbol);
+        const img = createImage(`id-coin-${coinId}`, "icon-coin-table", coins[index].image.small, coins[index].symbol);
         const spanSymbol = createSpan("", "symbol-coin-table", coins[index].symbol);
         const spanName = createSpan("", "name-coin-table", coins[index].name);
         tdCoin.append(img, spanSymbol, spanName);
@@ -50,7 +54,7 @@ function dadosTabela(coins) {
         tdPrice.innerHTML = coins[index].market_data.current_price.usd;
         
         let tdHours = document.createElement("td");
-        tdHours.innerHTML = `<button onClick=favoritos('${coins[index].id}')>fav</button></td>`;
+        tdHours.innerHTML = 0;
 
         tabela.append(trData);
         trData.append(tdRank, tdCoin, tdPrice, tdHours);
@@ -60,12 +64,16 @@ function dadosTabela(coins) {
     document.getElementById("spinner-coins-table").remove();
 }
 
-
 function favoritos(coinId) {
+    let srcImg = "";
     if (favoriteCoins.includes(coinId)) {
         removeFromFavorites(coinId);
+        srcImg = ICON_STAR;
     }
     else {
         addToFavorites(coinId);
+        srcImg = ICON_STAR_FILL;
     }
+
+    document.getElementById(`favorite-${coinId}-table`).src = srcImg;
 }

@@ -14,3 +14,13 @@
 .name-coin-table {
     font-weight: bold;
 }
+
+.favorite-coin-table {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.favorite-coin-table:hover {
+    cursor: pointer;
+}
