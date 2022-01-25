@@ -61,12 +61,15 @@ function dadosTabela(coins) {
 
         let tdHight24hours = document.createElement("td");
         tdHight24hours.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.high_24h.usd);
-        
+        tdHight24hours.className = "d-none d-md-table-cell";
+
         let tdLow24hours = document.createElement("td");
         tdLow24hours.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.low_24h.usd);
+        tdLow24hours.className = "d-none d-md-table-cell";
 
         let tdMarketCap = document.createElement("td");
         tdMarketCap.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.market_cap.usd);
+        tdMarketCap.className = "d-none d-md-table-cell";
 
 
         tabela.append(trData);
