@@ -24,3 +24,11 @@
 .favorite-coin-table:hover {
     cursor: pointer;
 }
+
+.positive-number {
+    color: rgb(14, 203, 129);
+}
+
+.negative-number {
+    color: rgb(246, 70, 93);
+}

@@ -55,7 +55,9 @@ function dadosTabela(coins) {
         tdPrice.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.current_price.usd);
         
         let td24Hours = document.createElement("td");
-        td24Hours.innerHTML = coins[index].market_data.price_change_percentage_24h;
+        const priceChangePercentage24 = coins[index].market_data.price_change_percentage_24h.toFixed(2);
+        td24Hours.innerHTML = priceChangePercentage24 > 0 ? `+${priceChangePercentage24}` : `${priceChangePercentage24}`;
+        td24Hours.className = priceChangePercentage24 > 0 ? "positive-number" : "negative-number";
 
         let tdHight24hours = document.createElement("td");
         tdHight24hours.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.high_24h.usd);
