@@ -51,13 +51,24 @@ function dadosTabela(coins) {
         tdCoin.append(img, spanSymbol, spanName);
         
         let tdPrice = document.createElement("td");
-        tdPrice.innerHTML = coins[index].market_data.current_price.usd;
         
-        let tdHours = document.createElement("td");
-        tdHours.innerHTML = 0;
+        tdPrice.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.current_price.usd);
+        
+        let td24Hours = document.createElement("td");
+        td24Hours.innerHTML = coins[index].market_data.price_change_percentage_24h;
+
+        let tdHight24hours = document.createElement("td");
+        tdHight24hours.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.high_24h.usd);
+        
+        let tdLow24hours = document.createElement("td");
+        tdLow24hours.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.low_24h.usd);
+
+        let tdMarketCap = document.createElement("td");
+        tdMarketCap.innerHTML = numberFormat("en-US", "USD", coins[index].market_data.market_cap.usd);
+
 
         tabela.append(trData);
-        trData.append(tdRank, tdCoin, tdPrice, tdHours);
+        trData.append(tdRank, tdCoin, tdPrice, td24Hours, tdHight24hours, tdLow24hours, tdMarketCap);
     }
 
     // Depois de os dados serem carregados remove o spinner.
@@ -76,4 +87,8 @@ function favoritos(coinId) {
     }
 
     document.getElementById(`favorite-${coinId}-table`).src = srcImg;
+}
+
+function numberFormat(locale, currency, value) {
+    return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value);
 }
