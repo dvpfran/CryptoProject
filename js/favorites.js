@@ -44,7 +44,7 @@ function removeFromFavorites(coinId) {
 function loadFavoriteCoinsFromLocalStorage() {
     let stringFavoriteCoins = localStorage.getItem(FAVORITE_COINS);
     // Verifica se o localStorage não está vazio.
-    if (stringFavoriteCoins != "") {
+    if (stringFavoriteCoins != "" && stringFavoriteCoins != null) {
         favoriteCoins = JSON.parse(stringFavoriteCoins);
     }
 }
