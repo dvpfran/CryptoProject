@@ -37,8 +37,9 @@ function dadosTabela(coins) {
         const coinId = coins[index].id;       
         
         let trData = document.createElement("tr");
+        trData.addEventListener("click", () => openDetailsPage(coinId));
+
         let tdRank = document.createElement("td");
-        
         const srcImgFavorite = favoriteCoins.includes(coinId) ? ICON_STAR_FILL : ICON_STAR;
         let imgFavorite = createImage(`favorite-${coinId}-table`, "favorite-coin-table",  srcImgFavorite, "");
         imgFavorite.addEventListener("click", () => favoritos(coinId), false);
@@ -96,4 +97,8 @@ function favoritos(coinId) {
 
 function numberFormat(locale, currency, value) {
     return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value);
+}
+
+function openDetailsPage(coinId) {
+    window.open(`details.html?moeda=${coinId}`, "_self");
 }
