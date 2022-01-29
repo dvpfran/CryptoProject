@@ -1,97 +1,64 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>CryonPlace</title>
-    <script src="js\api\coinGeckoAPI.js"></script>
-    <script src="js\favorites.js"></script>
-    <script src="js\searchBar.js"></script>
-    <script>
-
-        window.onload = async () => {
-            loadFavoriteCoinsFromLocalStorage();
-            allCoins = await getAllCoins();
-            let coins = await getCoins();
-            dadosTabela(coins);
-            Pesquisa(allCoins);
-        }
-
-        function Pesquisa(allCoins) {
-            let lista = document.getElementById("lista");
-
-            document.getElementById("barraPesquisa").addEventListener("keyup", async (e) => {
-
-                let dataListOptions = document.getElementById("lista");
-                dataListOptions.innerHTML = "";
-
-                let filteredCoins = await getSearchResults(e);
-
-                for (let index = 0; index < filteredCoins.length; index++) {
-
-                    setTimeout(() => {
-                        let optionData = document.createElement("option");
-                        optionData.value = filteredCoins[index].id;
-                        optionData.innerHTML = filteredCoins[index].name;
-                        dataListOptions.append(optionData);
-                    }, 20);
-                }
-            });
-        }
-
-        function dadosTabela(coins) {
-            let tabela = document.getElementById("Dados");
-
-            for (let index = 0; index < coins.length; index++) {
-
-                let trData = document.createElement("tr");
-                trData.innerHTML = "";
-                let tdRank = document.createElement("td");
-                tdRank.innerHTML = coins[index].market_data.market_cap_rank;
-                let tdCoin = document.createElement("td");
-                tdCoin.innerHTML = coins[index].name;
-                let tdPrice = document.createElement("td");
-                tdPrice.innerHTML = coins[index].market_data.current_price.usd;
-                let tdHours = document.createElement("td");
-                tdHours.innerHTML = `<button onClick=Favoritos('${coins[index].id}')>fav</button></td>`;
-
-                tabela.append(trData);
-                trData.append(tdRank, tdCoin, tdPrice, tdHours);
-
-            }
-        }
-
-        function Favoritos(coinId) {
-            if (favoriteCoins.includes(coinId)) {
-                removeFromFavorites(coinId);
-            }
-            else {
-                addToFavorites(coinId);
-            }
-        }
-
-    </script>
-</head>
-
-<body>
-    <div>
-        <input id="barraPesquisa" list="lista" placeholder="Pesquisar">
-        <datalist id="lista">
-        </datalist>
-    </div>
-    <div>
-        <table>
-            <thead>
-                <tr style="font-size: 20px;">
-                    <th>Ranking</th>
-                    <th>Moeda</th>
-                    <th>Preço</th>
-                    <th>24 Horas</th>
-                </tr>
-            </thead>
-            <tbody id="Dados"></tbody>
-        </table>
-    </div>
-
-</body>
-
+    <head>
+        <title>CryonPlace</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./styles/styles.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="js\api\coinGeckoAPI.js"></script>
+        <script src="js\constants.js"></script>
+        <script src="js\elements.js"></script>
+        <script src="js\favorites.js"></script>
+        <script src="js\searchBar.js"></script>
+        <script src="js\index.js"></script>
+    </head>
+    <body>
+        <div class="row justify-content-center">
+            <div class="col-sm-7">
+                <div id="menu" class="row mt-2 mb-2">
+                    <ul id="menu-list">
+                        <li>
+                            <a class="button-link" href="#">Favoritos</a>
+                        </li>
+                        
+                        <li>
+                            <a class="button-link" href="#">Notícias</a>
+                        </li>
+                        <li class="float-end">
+                            <input id="barraPesquisa" list="lista" placeholder="Pesquisar">
+                            <datalist id="lista">
+                            </datalist>
+                        </li>
+                        <li>
+                            <a class="float-end" href="#">DarkMode</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <table id="coins-table" class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Ranking</th>
+                                <th>Moeda</th>
+                                <th>Preço</th>
+                                <th>24h</th>
+                                <th class="d-none d-md-table-cell">Max. 24h</th>
+                                <th class="d-none d-md-table-cell">Min. 24h</th>
+                                <th class="d-none d-md-table-cell">Capitalização</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Dados">
+                        </tbody>
+                    </table>
+                    <div id="spinner-coins-table" class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">A carregar dados...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
