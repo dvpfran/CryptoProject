@@ -5,8 +5,17 @@ body {
 #menu {
     background-color: #20304c;
     border-radius: 4px;
-    height: 50px;
-    align-items: center;
+}
+
+#menu-list {
+    margin-top: 15px;
+    list-style: none;
+}
+
+#menu-list li {
+    color: white;
+    display: inline;
+    margin-right: 10px;
 }
 
 #coins-table {
@@ -22,6 +31,19 @@ body {
     cursor: pointer;
     background-color: #0c1a32;
     opacity: 0.7;
+}
+
+.button-link {
+    background-color: rgba(70, 107, 228, 0.685);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.button-link:hover {
+    background-color: rgba(142, 163, 233, 0.685);
+    color: white;
 }
 
 .icon-coin-table {
