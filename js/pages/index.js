@@ -31,24 +31,6 @@ function Pesquisa(allCoins) {
     });
 }
 
-function favoritos(coinId) {
-    let srcImg = "";
-    if (favoriteCoins.includes(coinId)) {
-        removeFromFavorites(coinId);
-        srcImg = ICON_STAR;
-    }
-    else {
-        addToFavorites(coinId);
-        srcImg = ICON_STAR_FILL;
-    }
-
-    document.getElementById(`favorite-${coinId}-table`).src = srcImg;
-}
-
 function numberFormat(locale, currency, value) {
     return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value);
-}
-
-function openDetailsPage(coinId) {
-    window.open(`details.html?moeda=${coinId}`, "_self");
 }
