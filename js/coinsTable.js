@@ -50,9 +50,6 @@ function fillCoinsTable(coins) {
         tabela.append(trData);
         trData.append(tdRank, tdCoin, tdPrice, td24Hours, tdHight24hours, tdLow24hours, tdMarketCap);
     }
-
-    // Depois de os dados serem carregados remove o spinner.
-    document.getElementById("spinner-coins-table").remove();
 }
 
 function numberFormat(locale, currency, value) {
