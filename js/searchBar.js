@@ -51,7 +51,13 @@ let actualWord = "";
 let lastWord = "";
 let canSearch = false;
 
-function enableInterval() {
+/**
+ * Visto que são muitos registos, foi criado um timer para
+ * não estar sempre a atualizar a datalist.
+ * No firefox não seria necessário mas no chrome e edge
+ * ficava muito lento.
+*/
+function enableTimer() {
     intervalSearchBar = setInterval(() => {
         if (countDifference == 400 && !isKeyDown) {
             canSearch = true;
@@ -59,11 +65,10 @@ function enableInterval() {
         }
 
         countDifference += 50;
-
     }, 100);
 }
 
-function disableInterval() {
+function disableTimer() {
     clearTimeout(intervalSearchBar);
 }
 
@@ -71,6 +76,7 @@ function handlersBarraPesquisa() {
     let barraPesquisa = document.getElementById("barraPesquisa");
 
     barraPesquisa.addEventListener("keydown", async (e) => {
+        // Sempre que uma tecla é pressionada reseta o contador de pesquisa.
         isKeyDown = true;
         canSearch = false;
         countDifference = 0;
@@ -82,22 +88,24 @@ function handlersBarraPesquisa() {
     });
 
     barraPesquisa.addEventListener("focus", () => {
-        enableInterval();
+        enableTimer();
     });
 
     barraPesquisa.addEventListener("focusout", () => {
-        disableInterval();
+        disableTimer();
     });
 }
 
 async function fillDataList() {
     if (canSearch) {
+        // Verifica se a palavra da última pesquisa não é igual a atual.
         if (lastWord !== barraPesquisa.value) {
             let dataListOptions = document.getElementById("lista");
             dataListOptions.innerHTML = "";
 
             lastWord = barraPesquisa.value;
 
+            // Foi criado um documentFragment para não estar a atualizar a datalist diretamente.
             let fragment = document.createDocumentFragment();
             let filteredCoins = await getSearchResults(actualWord);
     
@@ -108,6 +116,9 @@ async function fillDataList() {
                 fragment.appendChild(optionData);
             }
             
+            // Condição só para garantir que o canSearch ainda está a true
+            // pois pode ter havido uma nova pesquisa enquanto a lista de 
+            // options era adicionada ao document fragment.
             if (canSearch) {
                 dataListOptions.append(fragment);
             }
