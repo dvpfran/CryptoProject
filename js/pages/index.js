@@ -12,6 +12,7 @@ window.onload = async () => {
 
     allCoins = await getAllCoins();
     handlersBarraPesquisa();
+    document.getElementById("barraPesquisa").focus();
 }
 
 function numberFormat(locale, currency, value) {
