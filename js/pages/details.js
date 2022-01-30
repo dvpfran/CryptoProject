@@ -3,6 +3,8 @@ function mostrarMoeda(moeda) {
     document.getElementById("details-coin-rank").innerHTML = `#${moeda.market_cap_rank} - `;
     document.getElementById("details-coin-img").src = moeda.image.small;
     document.getElementById("details-coin-current-price").innerHTML = `Current Price: ${numberFormat("en-US", "USD", moeda.market_data.current_price.usd)}`;
+    document.getElementById("details-coin-min-price").innerHTML = `${numberFormat("en-US", "USD", moeda.market_data.low_24h.usd)}`;
+    document.getElementById("details-coin-max-price").innerHTML = `${numberFormat("en-US", "USD", moeda.market_data.high_24h.usd)}`;
     let elmPriceChange = document.getElementById("details-coin-price-percentage");
     const priceChangePercentage = moeda.market_data.price_change_percentage_24h.toFixed(2);
     elmPriceChange.innerHTML = `${priceChangePercentage}%`;

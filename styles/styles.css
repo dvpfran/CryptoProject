@@ -112,3 +112,11 @@ body {
 #details-coin-current-price {
     margin-right: 10px;
 }
+
+.content-details {
+    background-color: #20304c !important;
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    margin-right: 10px;
+}
