@@ -53,7 +53,12 @@ function fillCoinsTable(coins) {
 }
 
 function numberFormat(locale, currency, value) {
-    return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value);
+    return new Intl.NumberFormat(locale, 
+        { style: 'currency',
+          currency: currency,
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(value);
 }
 
 function openDetailsPage(coinId) {
