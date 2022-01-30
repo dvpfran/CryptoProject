@@ -53,6 +53,10 @@ body {
     color: white;
 }
 
+.button-link-active {
+    background-color: orange;
+}
+
 .icon-coin-table {
     width: 25px;
     height: 25px;
