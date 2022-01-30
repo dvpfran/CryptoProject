@@ -43,3 +43,25 @@ function getFilteredCoins(filter) {
         x.name.toLowerCase().startsWith(filter) ||
         x.symbol.toLowerCase().startsWith(filter));
 }
+
+function showFilteredResults(allCoins) {
+    let lista = document.getElementById("lista");
+
+    document.getElementById("barraPesquisa").addEventListener("keyup", async (e) => {
+
+        let dataListOptions = document.getElementById("lista");
+        dataListOptions.innerHTML = "";
+
+        let filteredCoins = await getSearchResults(e);
+
+        for (let index = 0; index < filteredCoins.length; index++) {
+
+            setTimeout(() => {
+                let optionData = document.createElement("option");
+                optionData.value = filteredCoins[index].id;
+                optionData.innerHTML = filteredCoins[index].name;
+                dataListOptions.append(optionData);
+            }, 20);
+        }
+    });
+}

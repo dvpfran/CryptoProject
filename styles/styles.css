@@ -7,17 +7,9 @@ body {
 #menu {
     background-color: #20304c;
     border-radius: 4px;
-}
-
-#menu-list {
-    margin-top: 15px;
-    list-style: none;
-}
-
-#menu-list li {
-    color: white;
-    display: inline;
-    margin-right: 10px;
+    display: flex;
+    align-content: center;
+    padding: 10px;
 }
 
 #coins-table {
@@ -47,6 +39,7 @@ body {
     padding: 8px;
     border-radius: 4px;
     text-decoration: none;
+    margin-right: 8px;
 }
 
 .button-link:hover {
