@@ -44,24 +44,76 @@ function getFilteredCoins(filter) {
         x.symbol.toLowerCase().startsWith(filter));
 }
 
-function showFilteredResults(allCoins) {
-    let lista = document.getElementById("lista");
+let intervalSearchBar;
+let isKeyDown = false;
+let countDifference = 0;
+let actualWord = "";
+let lastWord = "";
+let canSearch = false;
 
-    document.getElementById("barraPesquisa").addEventListener("keyup", async (e) => {
+function enableInterval() {
+    intervalSearchBar = setInterval(() => {
+        if (countDifference == 400 && !isKeyDown) {
+            console.log("canSearch = true");
+            canSearch = true;
+            fillDataList();
+        }
 
-        let dataListOptions = document.getElementById("lista");
-        dataListOptions.innerHTML = "";
+        countDifference += 50;
 
-        let filteredCoins = await getSearchResults(e);
+    }, 100);
+}
 
-        for (let index = 0; index < filteredCoins.length; index++) {
+function disableInterval() {
+    clearTimeout(intervalSearchBar);
+}
 
-            setTimeout(() => {
+function handlersBarraPesquisa() {
+    let barraPesquisa = document.getElementById("barraPesquisa");
+
+    barraPesquisa.addEventListener("keydown", async (e) => {
+        isKeyDown = true;
+        canSearch = false;
+        countDifference = 0;
+    });
+
+    barraPesquisa.addEventListener("keyup", async (e) => {
+        isKeyDown = false;
+        actualWord = e.target.value;
+    });
+
+    barraPesquisa.addEventListener("focus", () => {
+        enableInterval();
+    });
+
+    barraPesquisa.addEventListener("focusout", () => {
+        disableInterval();
+    });
+
+    document.get
+}
+
+async function fillDataList() {
+    if (canSearch) {
+        if (lastWord !== barraPesquisa.value) {
+            let dataListOptions = document.getElementById("lista");
+            dataListOptions.innerHTML = "";
+
+            lastWord = barraPesquisa.value;
+
+            let fragment = document.createDocumentFragment();
+            let filteredCoins = await getSearchResults(actualWord);
+    
+            for (let index = 0; index < filteredCoins.length; index++) {
                 let optionData = document.createElement("option");
                 optionData.value = filteredCoins[index].id;
                 optionData.innerHTML = filteredCoins[index].name;
-                dataListOptions.append(optionData);
-            }, 20);
+                fragment.appendChild(optionData);
+            }
+            
+            if (canSearch) {
+                dataListOptions.append(fragment);
+            }
         }
-    });
+    }
 }
