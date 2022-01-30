@@ -1,4 +1,7 @@
 window.onload = async () => {
+    isDarkModeAtive = getDarkModeFromLocalStorage();
+    updateTheme();
+
     loadFavoriteCoinsFromLocalStorage();
     allCoins = await getAllCoins();
     let coins = await getCoins();
