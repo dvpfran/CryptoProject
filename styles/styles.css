@@ -1,4 +1,6 @@
 body {
+    padding-left: 20px;
+    padding-right: 20px;
     background: #0c1a32 !important;
 }
 
@@ -29,8 +31,14 @@ body {
 }
 #coins-table tr:hover {
     cursor: pointer;
-    background-color: #0c1a32;
-    opacity: 0.7;
+    background-color: rgb(0, 45, 168);
+}
+
+#img-darkmode {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .button-link {
@@ -44,6 +52,10 @@ body {
 .button-link:hover {
     background-color: rgba(142, 163, 233, 0.685);
     color: white;
+}
+
+.button-link-active {
+    background-color: orange;
 }
 
 .icon-coin-table {
@@ -80,4 +92,8 @@ body {
 
 .negative-number {
     color: rgb(246, 70, 93);
+}
+
+#warning-favorites-coins {
+    visibility: collapse;
 }
