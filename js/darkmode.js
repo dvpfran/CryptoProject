@@ -22,7 +22,7 @@ function getDarkModeFromLocalStorage() {
     // Se existir vai pegar no valor que está lá guardado.
     // Se não existir cria uma nova config no localstorage com o valor atual.
     if (darkModeStorage !== null) {
-        return darkModeStorage;
+        return darkModeStorage === "true".toLowerCase();
     }
     else {
         saveDarkModeToLocalStorage();
@@ -42,5 +42,5 @@ function saveDarkModeToLocalStorage() {
  */
 function updateTheme() {
     let imgDarkMode = document.getElementById("img-darkmode");
-    imgDarkMode.src = isDarkModeAtive === "true" ? ICON_MOON_YELLOW : ICON_MOON_BLACK;
+    imgDarkMode.src = isDarkModeAtive == true ? imgDarkMode.src = ICON_MOON_YELLOW : imgDarkMode.src = ICON_MOON_BLACK;
 }
