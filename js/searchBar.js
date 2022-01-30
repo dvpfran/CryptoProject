@@ -54,7 +54,6 @@ let canSearch = false;
 function enableInterval() {
     intervalSearchBar = setInterval(() => {
         if (countDifference == 400 && !isKeyDown) {
-            console.log("canSearch = true");
             canSearch = true;
             fillDataList();
         }
@@ -89,8 +88,6 @@ function handlersBarraPesquisa() {
     barraPesquisa.addEventListener("focusout", () => {
         disableInterval();
     });
-
-    document.get
 }
 
 async function fillDataList() {

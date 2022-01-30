@@ -4,11 +4,13 @@ window.onload = async () => {
 
     loadFavoriteCoinsFromLocalStorage();
     
-    allCoins = await getAllCoins();
     let coins = await getCoins();
     fillCoinsTable(coins);
+
     // Depois de os dados serem carregados remove o spinner.
     document.getElementById("spinner-coins-table").remove();
+
+    allCoins = await getAllCoins();
     handlersBarraPesquisa();
 }
 
