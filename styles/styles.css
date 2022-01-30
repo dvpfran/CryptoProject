@@ -91,3 +91,7 @@ body {
 .negative-number {
     color: rgb(246, 70, 93);
 }
+
+#warning-favorites-coins {
+    visibility: collapse;
+}

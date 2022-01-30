@@ -6,6 +6,12 @@ window.onload = async () => {
     let coins = await getFavoriteCoins();
 
     fillCoinsTable(coins);
+    if (coins.length > 0) {
+        fillCoinsTable(coins);
+    }
+    else {
+        document.getElementById("warning-favorites-coins").style.visibility = "visible";
+    }
 }
 
 async function getFavoriteCoins(){
