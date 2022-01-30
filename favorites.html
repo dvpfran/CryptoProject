@@ -19,26 +19,20 @@
     <body>
         <div class="row justify-content-center">
             <div class="col-xs">
-                <div id="menu" class="row mt-2 mb-2">
-                    <ul id="menu-list">
-                        <li>
-                            <a class="button-link" href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a class="button-link button-link-active" href="#">Favoritos</a>
-                        </li>
-                        <li>
-                            <a class="button-link" href="#">Notícias</a>
-                        </li>
-                        <li class="float-end d-none d-md-table-cell">
-                            <input id="barraPesquisa" list="lista" placeholder="Pesquisar">
-                            <datalist id="lista">
-                            </datalist>
-                        </li>
-                        <li>
-                            <img id="img-darkmode" class="float-end" src="img/moon-yellow.svg" onclick="changeDarkMode()"/>
-                        </li>
-                    </ul>
+                <div class="row">
+                    <div id="menu" class="mt-2 mb-2">
+                        <a class="button-link" href="index.html">Home</a>
+                        <a class="button-link button-link-active" href="#">Favoritos</a>
+                        <a class="button-link" href="#">Notícias</a>
+                        <div class="ms-auto d-flex">
+                            <img id="img-darkmode" class="mt-1" src="img/moon-yellow.svg" onclick="changeDarkMode()"/>
+                            <div class="d-md-table-cell">
+                                <input id="barraPesquisa" autoComplete="off" class="form-control" list="lista" placeholder="Pesquisar">
+                                <datalist id="lista">
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <table id="coins-table" class="table table-sm">

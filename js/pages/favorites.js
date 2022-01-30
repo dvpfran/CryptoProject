@@ -3,16 +3,20 @@ window.onload = async () => {
     updateTheme();
 
     loadFavoriteCoinsFromLocalStorage();
+    
     let coins = await getFavoriteCoins();
-
     if (coins.length > 0) {
         fillCoinsTable(coins);
     }
     else {
         document.getElementById("warning-favorites-coins").style.visibility = "visible";
     }
+    
     // Depois de os dados serem carregados remove o spinner.
     document.getElementById("spinner-coins-table").remove();
+
+    allCoins = await getAllCoins();
+    handlersBarraPesquisa();
 }
 
 async function getFavoriteCoins(){
