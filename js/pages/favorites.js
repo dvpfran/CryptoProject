@@ -1,6 +1,9 @@
 let coins = [];
 
 window.onload = async () => {
+    isDarkModeAtive = getDarkModeFromLocalStorage();
+    updateTheme();
+
     loadFavoriteCoinsFromLocalStorage();
     await getFavoriteCoins()
     dadosTabela(coins);
