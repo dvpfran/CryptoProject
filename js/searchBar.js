@@ -86,7 +86,7 @@ function handlersBarraPesquisa() {
         isKeyDown = false;
         actualWord = e.target.value;
 
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && barraPesquisa.value != "") {
             const searchCoin = allCoins.filter(x => 
                 x.id == barraPesquisa.value || 
                 x.symbol == barraPesquisa.value || 

@@ -3,11 +3,11 @@ let converters;
 window.onload = async () => {
     const moeda = await getCoin(buscarMoedaSelecionada());
     mostrarMoeda(moeda);
+    allCoins = await getAllCoins();
     fillConvertersList(moeda);
-
     const news = await getNewsBySymbolCoin(moeda.symbol);
-    console.log(news);
     fillNews(news);
+    handlersBarraPesquisa();
 }
 
 function mostrarMoeda(moeda) {
