@@ -90,3 +90,54 @@ body {
 #warning-favorites-coins {
     visibility: collapse;
 }
+
+#sub-menu-details {
+    background-color: #20304c;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.sub-menu-content {
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#details-coin-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+#details-coin-current-price {
+    margin-right: 10px;
+}
+
+.content-details {
+    background-color: #20304c !important;
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#coin-converter {
+    background-color: #20304c;
+    border-radius: 4px;
+    justify-content: center;
+}
+
+#content-converter {
+    margin-top: 15px;
+}
+
+#details-coins-news {
+    background-color: #20304c;
+    border-radius: 4px;
+    justify-content: center;
+    padding: 10px;
+}
+
+#table-details-news th {
+    color: white;
+}
