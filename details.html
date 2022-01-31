@@ -67,6 +67,23 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div id="coin-converter" class="d-flex justify-content-center">
+                    <div id="content-converter" class="sub-menu-content d-flex">
+                        <div class="input-group mb-3" style="max-width: 18rem; margin-right: 10px;">
+                            <span class="input-group-text" id="selected-coin-symbol"></span>
+                            <input id="quantity-coin-converter" onchange="updatePriceConverter()" type="number" min=1 value="1" class="form-control" placeholder="1" aria-label="Username">
+                        </div>
+                        <div class="input-group mb-3" style="max-width: 18rem;">
+                            <button id="btn-coin2-symbol-converter" class="btn btn-outline-secondary dropdown-toggle text-white bg-warning"  type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">USD</button>
+                            <ul id="list-converters" class="dropdown-menu">
+                            </ul>
+                            <input type="number" id="selected-coin2-price" min=1 onchange="updateQuantityConverter()" class="form-control" aria-label="">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
