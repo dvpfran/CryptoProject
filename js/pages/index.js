@@ -9,6 +9,13 @@ window.onload = async () => {
 
     // Depois de os dados serem carregados remove o spinner.
     document.getElementById("spinner-coins-table").remove();
+    sortTable();
+}
+
+function Pesquisa(allCoins) {
+    let lista = document.getElementById("lista");
+
+    document.getElementById("barraPesquisa").addEventListener("keyup", async (e) => {
 
     allCoins = await getAllCoins();
     handlersBarraPesquisa();

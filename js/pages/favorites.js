@@ -14,7 +14,7 @@ window.onload = async () => {
     
     // Depois de os dados serem carregados remove o spinner.
     document.getElementById("spinner-coins-table").remove();
-
+    sortTable();
     allCoins = await getAllCoins();
     handlersBarraPesquisa();
 }
