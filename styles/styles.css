@@ -99,20 +99,16 @@ body {
 }
 
 /* Filtros da tabela */
-.table-sortable th {
-    cursor: pointer;
-  }
-  
-  .table-sortable .order-asc::after {
+.table-sortable .order-asc::after {
     content: "\25b4";  /*seta para cima*/
-  }
+}
   
-  .table-sortable .order-desc::after {
+.table-sortable .order-desc::after {
     content: "\25be";  /*seta para baixo*/
-  }
+}
   
-  .table-sortable .order-asc::after,
-  .table-sortable .order-desc::after {
+.table-sortable .order-asc::after,
+.table-sortable .order-desc::after {
     margin-left: 5px;
-  }
+}
   
