@@ -15,6 +15,8 @@ window.onload = async () => {
 
         const news = await getNewsBySymbolCoin(moeda.symbol);
         fillNews(news);
+
+        loadAlertsFromLocalStorage();
     }
     else {
         document.getElementById("details-content").remove();
@@ -175,27 +177,42 @@ function checkFavoriteImage() {
 }
 
 function addAlert() {
-    let divAlert = createDiv("", "details-coins-alerts mt-1 d-flex")
+    const alerts = getAlertsByCoinId(coinIdDetails);
+    const nextId = alerts.length > 0 ? alerts[alerts.length -1].id +1 : 1;
+
+    let divAlert = createDiv(`alert-${nextId}`, "details-coins-alerts mt-2 d-flex")
 
     let divMinValue = createDiv("", "form-control-alert");
     let labelMin = createLabel("Valor mínimo");
-    let inputMin = createInput("", "form-control", "number", 0);
+    let inputMin = createInput(`alert-min-${nextId}`, "form-control", "number", 0);
     divMinValue.append(labelMin, inputMin);
 
     let divMaxValue = createDiv("", "form-control-alert");
     let labelMax = createLabel("Valor máximo:");
-    let inputMax = createInput("", "form-control", "number", 0);
+    let inputMax = createInput(`alert-max-${nextId}`, "form-control", "number", 0);
     divMaxValue.append(labelMax, inputMax);
 
     let divButtons = createDiv("", "ms-auto");
-    let btnSave = createButton("","button-alert button-save-alert", "Guardar");
-    let btnRemove = createButton("","button-alert button-remove-alert", "Remover");
+    let btnSave = createButton(`alert-save-${nextId}`,"button-alert button-save-alert", "Guardar");
+    btnSave.addEventListener("click", () => {
+        let toast;
+        if (saveAlert(nextId, coinIdDetails, inputMin.value, inputMax.value)) {
+            toast = createToast("", "success", "Alerta guardado", "O alerta foi guardado com sucesso")
+        }
+        else {
+            toast = createToast("", "error", "Erro ao guardar alerta", "Os valores mínimo não pode ser que o valor máximo ou ambos os valores não podem ser 0.")
+        }
+        document.getElementById("content-toast").append(toast);
+    });
+    
+    let btnRemove = createButton(`alert-remove-${nextId}`,"button-alert button-remove-alert", "Remover");
+    
+    btnRemove.addEventListener("click", () => {
+        document.getElementById(`alert-${nextId}`).remove();
+        removeAlert(nextId, coinIdDetails);
+    });
 
     divButtons.append(btnSave, btnRemove);
     divAlert.append(divMinValue, divMaxValue, divButtons);
     document.getElementById("row-alerts").append(divAlert);
-}
-
-function removeAlert() {
-
 }

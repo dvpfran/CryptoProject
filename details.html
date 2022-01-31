@@ -14,6 +14,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="js/api/coinGeckoAPI.js"></script>
     <script src="js/api/cryptoPanicAPI.js"></script>
+    <script src="js/alert.js"></script>
     <script src="js/constants.js"></script>
     <script src="js/elements.js"></script>
     <script src="js/darkmode.js"></script>
@@ -23,6 +24,27 @@
 </head>
 
 <body>
+    <div id="content-toast" class="toast-container">
+        <div id="error-toast" class="toast show bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong id="titulo" class="me-auto">Não foi possível guardar o alerta</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body" style="color: white;">
+            Os valor mínimo não pode ser que o valor máximo ou ambos os valores não podem ser 0.
+          </div>
+        </div>
+        <div class="toast show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Alerta guardado</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Alerta guardado com sucesso.
+          </div>
+        </div>
+      </div>
     <div class="row justify-content-center">
         <div class="col-xs">
             <div class="row">

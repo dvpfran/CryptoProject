@@ -210,3 +210,10 @@ body {
     width: 25px;
     height: 25px;
 }
+
+#content-toast {
+    position: absolute;
+    right: 0;
+    margin: 10px;
+}
+

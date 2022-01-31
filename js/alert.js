@@ -7,17 +7,13 @@ const ALERTS = "ALERTS";
  * @param {string} coinId Id da moeda configurada para o alerta.
  * @param {number} minValue Valor mínimo da moeda para dispultar o alerta.
  * @param {number} maxValue Valor máximo da moeda para dispultar o alerta.
- * @param {bool} isDispatch Propriedade para verificar se o alerta já foi dispultado alguma vez.
- * @param {bool} isSeen  Propriedade para verificar se o alerta já foi visto pelo utilizador.
 */
 class Alert {
-    constructor(id, coinId, minValue, maxValue, isDispatch, isSeen) {
+    constructor(id, coinId, minValue, maxValue) {
         this.id = id;
         this.coinId = coinId;
         this.minValue = minValue;
         this.maxValue = maxValue;
-        this.isDispatch = isDispatch;
-        this.isSeen = isSeen;
     }
 }
 
@@ -32,10 +28,9 @@ let alerts = [];
  * @param {string} coinId Id da moeda configurada para o alerta.
  * @param {number} minValue Valor mínimo da moeda para dispultar o alerta.
  * @param {number} maxValue Valor máximo da moeda para dispultar o alerta.
- * @param {bool} isDispatch Propriedade para verificar se o alerta já foi dispultado alguma vez.
- * @param {bool} isSeen  Propriedade para verificar se o alerta já foi visto pelo utilizador.
+ * @return {boolean} Se for guardado com sucesso retorna verdadeiro.
 */
-function addAlert(id, coinId, minValue, maxValue) {
+function saveAlert(id, coinId, minValue, maxValue) {
     // Carrega a lista no caso do array ainda não ter sido inicializado.
     if (!alerts) {
         loadAlertsFromLocalStorage();
@@ -45,7 +40,9 @@ function addAlert(id, coinId, minValue, maxValue) {
     if (isAlertValid(alert)) {
         alerts.push(alert);
         saveAlertsToLocalStorage();
+        return true;
     }
+    return false;
 }
 
 /**
@@ -55,7 +52,7 @@ function addAlert(id, coinId, minValue, maxValue) {
  * @return {bool} Vai retornar falso se já existir uma alerta com as configurações iguais.
  */
 function isAlertValid(alert) {
-    if (alert.minValue > alert.maxValue)
+    if (alert.minValue > alert.maxValue || (alert.minValue == 0 && alert.maxValue == 0))
         return false;
 
     if (alerts.some(x =>
@@ -72,14 +69,14 @@ function isAlertValid(alert) {
  * Vai remover um alerta conforme o Id passado por parâmetro.
  * @param {number} id Id do alerta.
  */
-function removeAlert(id) {
+function removeAlert(id, coinId) {
     if (!alerts) {
         loadAlertsFromLocalStorage();
     }
 
     // No do id passado por parâmetro existir
     // O valor do index vai ser diferente de -1.
-    let indexAlert = alerts.indexOf(alerts.find(x => x.id == id));
+    let indexAlert = alerts.indexOf(alerts.find(x => x.id == id && x.coinId == coinId));
     if (indexAlert != -1) {
         alerts.splice(indexAlert, 1);
         saveAlertsToLocalStorage();
@@ -96,15 +93,15 @@ function loadAlertsFromLocalStorage() {
         // Converte a string do localStorage para um JSON.
         // Depois vai percorrer a lista para transformar cada JSON num Alert.
         let jsonAlerts = JSON.parse(stringAlerts);
-        for (let index = 0; index < jsonAlerts.length; index++) {
-            alerts.push(new Alert(
-                jsonAlerts[index].id,
-                jsonAlerts[index].coinId,
-                jsonAlerts[index].minValue,
-                jsonAlerts[index].maxValue,
-                jsonAlerts[index].isDispatch,
-                jsonAlerts[index].isSeen
-            ));
+        if (jsonAlerts != "" && jsonAlerts != null){
+            for (let index = 0; index < jsonAlerts.length; index++) {
+                alerts.push(new Alert(
+                    jsonAlerts[index].id,
+                    jsonAlerts[index].coinId,
+                    jsonAlerts[index].minValue,
+                    jsonAlerts[index].maxValue,
+                ));
+            }
         }
     }
 }
@@ -115,4 +112,12 @@ function loadAlertsFromLocalStorage() {
 function saveAlertsToLocalStorage() {
     let stringAlerts = JSON.stringify(alerts);
     localStorage.setItem(ALERTS, stringAlerts);
+}
+
+/**
+ * Retorna o valor de todos os alertas do parâmetro filtrado.
+ * @return {Alert[]}
+ */
+function getAlertsByCoinId(coinId) {
+    return alerts.filter(x => x.coinId == coinId);
 }
