@@ -85,6 +85,10 @@ function handlersBarraPesquisa() {
     barraPesquisa.addEventListener("keyup", async (e) => {
         isKeyDown = false;
         actualWord = e.target.value;
+
+        if (e.key === "Enter") {
+            openSearchResultPage();
+        }
     });
 
     barraPesquisa.addEventListener("focus", () => {
@@ -122,6 +126,23 @@ async function fillDataList() {
             if (canSearch) {
                 dataListOptions.append(fragment);
             }
+        }
+    }
+}
+
+function openSearchResultPage() {
+    let barraPesquisa = document.getElementById("barraPesquisa");
+    if (barraPesquisa.value != "" && barraPesquisa.value != "undefined") {
+        const searchCoin = allCoins.filter(x => 
+            x.id == barraPesquisa.value || 
+            x.symbol == barraPesquisa.value || 
+            x.name == barraPesquisa.value);
+        
+        if (searchCoin.length > 0)    {
+                window.open(`details.html?moeda=${searchCoin[0].id}`);
+        }
+        else {
+            alert("A moeda introduzida não é válida");
         }
     }
 }

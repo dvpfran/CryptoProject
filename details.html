@@ -34,65 +34,73 @@
                         <img id="img-darkmode" class="mt-1" src="img/moon-yellow.svg" onclick="changeDarkMode()" />
                         <div class="d-md-table-cell">
                             <input id="barraPesquisa" autoComplete="off" class="form-control" list="lista"
-                                placeholder="Pesquisar">
+                            placeholder="Pesquisar">
                             <datalist id="lista">
                             </datalist>
                         </div>
+                        <img id="btn-search" class="button-link" src="img/search.svg" onclick="openSearchResultPage()" />
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div id="sub-menu-details">
-                    <div class="sub-menu-content d-flex">
-                        <img id="details-coin-img" src="" alt="coin-image" />
-                        <div class="d-flex" id="details-coin-rank"></div>
-                        <div class="d-flex" id="details-coin-name"></div>
-                        <div class="d-flex ms-auto">
-                            <div class="d-flex" id="details-coin-current-price"></div>
-                            <div class="d-flex" id="details-coin-price-percentage"></div>
+            <div id="details-content">
+                <div class="row">
+                    <div id="sub-menu-details">
+                        <div class="sub-menu-content d-flex">
+                            <img id="details-coin-img" src="" alt="coin-image" />
+                            <div class="d-flex" id="details-coin-rank"></div>
+                            <div class="d-flex" id="details-coin-name"></div>
+                            <div class="d-flex ms-auto">
+                                <div class="d-flex" id="details-coin-current-price"></div>
+                                <div class="d-flex" id="details-coin-price-percentage"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="card content-details mt-2 mb-2" style="max-width: 12rem;">
-                    <div class="card-body">
-                        <h5 class="card-title text-end">24h min.</h5>
-                        <p id="details-coin-min-price" class="card-text text-end fw-bold"></p>
-                    </div>
-                </div>
-                <div class="card content-details mt-2 mb-2" style="max-width: 12rem;">
-                    <div class="card-body">
-                        <h5 class="card-title text-end">24h máx.</h5>
-                        <p id="details-coin-max-price" class="card-text text-end fw-bold"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div id="coin-converter" class="d-flex justify-content-center">
-                    <div id="content-converter" class="sub-menu-content d-flex">
-                        <div class="input-group mb-3" style="max-width: 18rem; margin-right: 10px;">
-                            <span class="input-group-text" id="selected-coin-symbol"></span>
-                            <input id="quantity-coin-converter" onchange="updatePriceConverter()" type="number" min=1 value="1" class="form-control" placeholder="1">
+                <div class="row">
+                    <div class="card content-details mt-2 mb-2" style="max-width: 12rem;">
+                        <div class="card-body">
+                            <h5 class="card-title text-end">24h min.</h5>
+                            <p id="details-coin-min-price" class="card-text text-end fw-bold"></p>
                         </div>
-                        <div class="input-group mb-3" style="max-width: 18rem;">
-                            <button id="btn-coin2-symbol-converter" class="btn btn-outline-secondary dropdown-toggle text-white bg-warning"  type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">USD</button>
-                            <ul id="list-converters" class="dropdown-menu">
-                            </ul>
-                            <input type="number" id="selected-coin2-price" min=1 onchange="updateQuantityConverter()" class="form-control">
+                    </div>
+                    <div class="card content-details mt-2 mb-2" style="max-width: 12rem;">
+                        <div class="card-body">
+                            <h5 class="card-title text-end">24h máx.</h5>
+                            <p id="details-coin-max-price" class="card-text text-end fw-bold"></p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-2">
-                <div id="details-coins-news">
-                    <div class="sub-menu-content d-flex">
-                        <div class="d-flex">Notícias</div>
+                <div class="row">
+                    <div id="coin-converter" class="d-flex justify-content-center">
+                        <div id="content-converter" class="sub-menu-content d-flex">
+                            <div class="input-group mb-3" style="max-width: 18rem; margin-right: 10px;">
+                                <span class="input-group-text" id="selected-coin-symbol"></span>
+                                <input id="quantity-coin-converter" onchange="updatePriceConverter()" type="number" min=1 value="1" class="form-control" placeholder="1">
+                            </div>
+                            <div class="input-group mb-3" style="max-width: 18rem;">
+                                <button id="btn-coin2-symbol-converter" class="btn btn-outline-secondary dropdown-toggle text-white bg-warning"  type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">USD</button>
+                                <ul id="list-converters" class="dropdown-menu">
+                                </ul>
+                                <input type="number" id="selected-coin2-price" min=1 onchange="updateQuantityConverter()" class="form-control">
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="row mt-2">
+                    <div id="details-coins-news">
+                        <div class="sub-menu-content d-flex">
+                            <div class="d-flex">Notícias</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="details-news" class="row">
+                </div>
             </div>
-            <div id="details-news" class="row">
+            <div class="row">
+                <div id="warning-details-coin" class="text-center">
+                    <span class="text-warning fw-bold">Não foram encontrados resultados.</span>
+                </div>
             </div>
         </div>
     </div>

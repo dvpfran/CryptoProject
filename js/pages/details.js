@@ -2,12 +2,19 @@ let converters;
 
 window.onload = async () => {
     const moeda = await getCoin(buscarMoedaSelecionada());
-    mostrarMoeda(moeda);
-    fillConvertersList(moeda);
-
-    const news = await getNewsBySymbolCoin(moeda.symbol);
-    console.log(news);
-    fillNews(news);
+    console.log(moeda);
+    if (!moeda?.error) {
+        mostrarMoeda(moeda);
+        allCoins = await getAllCoins();
+        fillConvertersList(moeda);
+        const news = await getNewsBySymbolCoin(moeda.symbol);
+        fillNews(news);
+    }
+    else {
+        document.getElementById("details-content").remove();
+        document.getElementById("warning-details-coin").style.visibility = "visible";
+    }
+    handlersBarraPesquisa();
 }
 
 function mostrarMoeda(moeda) {
