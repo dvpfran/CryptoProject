@@ -141,3 +141,11 @@ body {
 #table-details-news th {
     color: white;
 }
+
+#btn-search {
+    width: 35px;
+    height: 35px;
+    margin-top: 2px;
+    margin-left: 10px;
+    cursor: pointer;
+}
