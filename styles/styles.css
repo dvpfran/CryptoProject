@@ -130,3 +130,14 @@ body {
 #content-converter {
     margin-top: 15px;
 }
+
+#details-coins-news {
+    background-color: #20304c;
+    border-radius: 4px;
+    justify-content: center;
+    padding: 10px;
+}
+
+#table-details-news th {
+    color: white;
+}

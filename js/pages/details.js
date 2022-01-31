@@ -1,5 +1,15 @@
 let converters;
 
+window.onload = async () => {
+    const moeda = await getCoin(buscarMoedaSelecionada());
+    mostrarMoeda(moeda);
+    fillConvertersList(moeda);
+
+    const news = await getNewsBySymbolCoin(moeda.symbol);
+    console.log(news);
+    fillNews(news);
+}
+
 function mostrarMoeda(moeda) {
     document.getElementById("details-coin-name").innerHTML = `${moeda.name} (${moeda.symbol.toUpperCase()})`;
     document.getElementById("details-coin-rank").innerHTML = `#${moeda.market_cap_rank} - `;
@@ -13,14 +23,6 @@ function mostrarMoeda(moeda) {
     elmPriceChange.innerHTML = `${priceChangePercentage}%`;
     elmPriceChange.className = priceChangePercentage > 0 ? "positive-number" : "negative-number";
 }
-
-async function buscarMoeda() {
-    var moeda = await getCoin(buscarMoedaSelecionada());
-    mostrarMoeda(moeda);
-    fillConvertersList(moeda);
-}
-
-buscarMoeda();
 
 function buscarMoedaSelecionada() {
     const paramsUrl = new URLSearchParams(window.location.search);
@@ -43,7 +45,7 @@ function fillConvertersList(moeda) {
         li.addEventListener("click", () => {
             document.getElementById("btn-coin2-symbol-converter").innerHTML = moeda[0].toUpperCase();
             document.getElementById("selected-coin2-price").value = moeda[1];
-           
+
         });
         elmConverters.appendChild(li);
         if (moeda[0] === "usd") {
@@ -101,4 +103,36 @@ function setQuantityConverter(quantity) {
 
 function setPriceConverter(price) {
     document.getElementById("selected-coin2-price").value = price;
+}
+
+function fillNews(news) {
+    let row = document.getElementById("details-news");
+
+    for (let index = 0; index < news.results.length; index++) {
+        let divCard = document.createElement("div");
+        divCard.className = "card content-details mt-2 mb-2";
+        divCard.style.maxWidth = "16rem";
+
+        let divTitulo = document.createElement("div");
+        divTitulo.className = "card-header fw-bold";
+        divTitulo.innerHTML = news.results[index].title;
+
+        let divCardBody = document.createElement("div");
+        divCardBody.className = "card-body";
+
+        let linkNew = document.createElement("a");
+        linkNew.className = "text-warning d-block text-end";
+        linkNew.href = news.results[index].url;
+        linkNew.innerHTML = "Abrir";
+        linkNew.target = "blank";
+
+        let pText = document.createElement("p");
+        pText.className = "card-title text-end";
+        pText.innerHTML = news.results[index].published_at;
+
+        divCardBody.append(pText, linkNew);
+
+        divCard.append(divTitulo, divCardBody);
+        row.append(divCard);
+    }
 }
