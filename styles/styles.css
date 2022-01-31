@@ -149,3 +149,7 @@ body {
     margin-left: 10px;
     cursor: pointer;
 }
+
+#warning-details-coin {
+    visibility: collapse;
+}
