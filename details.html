@@ -14,6 +14,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="js/api/coinGeckoAPI.js"></script>
     <script src="js/api/cryptoPanicAPI.js"></script>
+    <script src="js/alert.js"></script>
     <script src="js/constants.js"></script>
     <script src="js/elements.js"></script>
     <script src="js/darkmode.js"></script>
@@ -23,6 +24,8 @@
 </head>
 
 <body>
+    <div id="content-toast" class="toast-container">
+    </div>
     <div class="row justify-content-center">
         <div class="col-xs">
             <div class="row">
@@ -84,6 +87,18 @@
                                 <ul id="list-converters" class="dropdown-menu">
                                 </ul>
                                 <input type="number" id="selected-coin2-price" min=1 onchange="updateQuantityConverter()" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="row-alerts" class="row mt-2">
+                    <div class="details-coins-alerts">
+                        <div class="sub-menu-content d-flex">
+                            <div class="d-flex">Alertas</div>
+                            <div class="d-flex ms-auto">
+                                <button id="btn-plus" class="button-link" onclick="addAlert()">
+                                    <img id="img-plus" src="img/plus.svg"/>
+                                </button>
                             </div>
                         </div>
                     </div>

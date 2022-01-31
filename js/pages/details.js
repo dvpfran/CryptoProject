@@ -15,12 +15,29 @@ window.onload = async () => {
 
         const news = await getNewsBySymbolCoin(moeda.symbol);
         fillNews(news);
+
+        loadAlertsFromLocalStorage();
     }
     else {
         document.getElementById("details-content").remove();
         document.getElementById("warning-details-coin").style.visibility = "visible";
     }
     handlersBarraPesquisa();
+    
+    if (alerts.length > 0) {
+        for(let index = 0; index < alerts.length; index++) {
+            const coin = await getCoin(alerts[index].coinId);
+            if (coin != undefined) {
+                console.log(alerts[index].minValue);
+                console.log(alerts[index].maxValue);
+                console.log(coin.market_data.current_price.usd);
+                if (parseFloat(coin.market_data.current_price.usd) >= alerts[index].minValue && parseFloat(coin.market_data.current_price.usd) <= alerts[index].maxValue) {
+                    const toast = createToast("", "success", "Moeda antigiu certo valor.", `A moeda ${coin.name} antigiu o valor entre ${alerts[index].minValue} e ${alerts[index].maxValue}`);
+                    document.getElementById("content-toast").append(toast);
+                }
+            }
+        }
+    }
 }
 
 function mostrarMoeda(moeda) {
@@ -123,8 +140,7 @@ function fillNews(news) {
 
     for (let index = 0; index < news.results.length; index++) {
         let divCard = document.createElement("div");
-        divCard.className = "card content-details mt-2 mb-2";
-        divCard.style.maxWidth = "16rem";
+        divCard.className = "card content-details mt-2 mb-2 col-sm-3";
 
         let divTitulo = document.createElement("div");
         divTitulo.className = "card-header fw-bold";
@@ -173,4 +189,45 @@ function checkFavoriteImage() {
         srcImg = ICON_STAR;
     }
     document.getElementById("img-favorite-details").src = srcImg;
+}
+
+function addAlert() {
+    const alerts = getAlertsByCoinId(coinIdDetails);
+    const nextId = alerts.length > 0 ? alerts[alerts.length -1].id +1 : 1;
+
+    let divAlert = createDiv(`alert-${nextId}`, "details-coins-alerts mt-2 d-flex")
+
+    let divMinValue = createDiv("", "form-control-alert");
+    let labelMin = createLabel("Valor mínimo");
+    let inputMin = createInput(`alert-min-${nextId}`, "form-control", "number", 0);
+    divMinValue.append(labelMin, inputMin);
+
+    let divMaxValue = createDiv("", "form-control-alert");
+    let labelMax = createLabel("Valor máximo:");
+    let inputMax = createInput(`alert-max-${nextId}`, "form-control", "number", 0);
+    divMaxValue.append(labelMax, inputMax);
+
+    let divButtons = createDiv("", "ms-auto");
+    let btnSave = createButton(`alert-save-${nextId}`,"button-alert button-save-alert", "Guardar");
+    btnSave.addEventListener("click", () => {
+        let toast;
+        if (saveAlert(nextId, coinIdDetails, inputMin.value, inputMax.value)) {
+            toast = createToast("", "success", "Alerta guardado", "O alerta foi guardado com sucesso");
+        }
+        else {
+            toast = createToast("", "error", "Erro ao guardar alerta", "Os valores mínimo não pode ser que o valor máximo ou ambos os valores não podem ser 0.");
+        }
+        document.getElementById("content-toast").append(toast);
+    });
+    
+    let btnRemove = createButton(`alert-remove-${nextId}`,"button-alert button-remove-alert", "Remover");
+    
+    btnRemove.addEventListener("click", () => {
+        document.getElementById(`alert-${nextId}`).remove();
+        removeAlert(nextId, coinIdDetails);
+    });
+
+    divButtons.append(btnSave, btnRemove);
+    divAlert.append(divMinValue, divMaxValue, divButtons);
+    document.getElementById("row-alerts").append(divAlert);
 }
