@@ -153,3 +153,10 @@ body {
 #warning-details-coin {
     visibility: collapse;
 }
+
+#img-favorite-details {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+}

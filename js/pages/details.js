@@ -1,12 +1,18 @@
 let converters;
+let coinIdDetails;
 
 window.onload = async () => {
     const moeda = await getCoin(buscarMoedaSelecionada());
-    console.log(moeda);
     if (!moeda?.error) {
         mostrarMoeda(moeda);
+        
+        coinIdDetails = moeda.id;
+        loadFavoriteCoinsFromLocalStorage();
+        checkFavoriteImage();
+
         allCoins = await getAllCoins();
         fillConvertersList(moeda);
+
         const news = await getNewsBySymbolCoin(moeda.symbol);
         fillNews(news);
     }
@@ -142,4 +148,29 @@ function fillNews(news) {
         divCard.append(divTitulo, divCardBody);
         row.append(divCard);
     }
+}
+
+function favoritos() {
+    let srcImg = "";
+    if (favoriteCoins.includes(coinIdDetails)) {
+        removeFromFavorites(coinIdDetails);
+        srcImg = ICON_STAR;
+    }
+    else {
+        addToFavorites(coinIdDetails);
+        srcImg = ICON_STAR_FILL;
+    }
+
+    document.getElementById("img-favorite-details").src = srcImg;
+}
+
+function checkFavoriteImage() {
+    let srcImg = "";
+    if (favoriteCoins.includes(coinIdDetails)) {
+        srcImg = ICON_STAR_FILL;
+    }
+    else {
+        srcImg = ICON_STAR;
+    }
+    document.getElementById("img-favorite-details").src = srcImg;
 }
