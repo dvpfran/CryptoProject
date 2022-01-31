@@ -123,8 +123,7 @@ function fillNews(news) {
 
     for (let index = 0; index < news.results.length; index++) {
         let divCard = document.createElement("div");
-        divCard.className = "card content-details mt-2 mb-2";
-        divCard.style.maxWidth = "16rem";
+        divCard.className = "card content-details mt-2 mb-2 col-sm-3";
 
         let divTitulo = document.createElement("div");
         divTitulo.className = "card-header fw-bold";
@@ -173,4 +172,30 @@ function checkFavoriteImage() {
         srcImg = ICON_STAR;
     }
     document.getElementById("img-favorite-details").src = srcImg;
+}
+
+function addAlert() {
+    let divAlert = createDiv("", "details-coins-alerts mt-1 d-flex")
+
+    let divMinValue = createDiv("", "form-control-alert");
+    let labelMin = createLabel("Valor mínimo");
+    let inputMin = createInput("", "form-control", "number", 0);
+    divMinValue.append(labelMin, inputMin);
+
+    let divMaxValue = createDiv("", "form-control-alert");
+    let labelMax = createLabel("Valor máximo:");
+    let inputMax = createInput("", "form-control", "number", 0);
+    divMaxValue.append(labelMax, inputMax);
+
+    let divButtons = createDiv("", "ms-auto");
+    let btnSave = createButton("","button-alert button-save-alert", "Guardar");
+    let btnRemove = createButton("","button-alert button-remove-alert", "Remover");
+
+    divButtons.append(btnSave, btnRemove);
+    divAlert.append(divMinValue, divMaxValue, divButtons);
+    document.getElementById("row-alerts").append(divAlert);
+}
+
+function removeAlert() {
+
 }

@@ -160,3 +160,53 @@ body {
     margin-right: 20px;
     cursor: pointer;
 }
+
+.details-coins-alerts {
+    background-color: #20304c;
+    border-radius: 4px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.details-coins-alerts label {
+    color: white;
+    font-weight: bold;
+}
+
+.form-control-alert {
+    margin-right: 8px;
+}
+
+.button-alert {
+    border: none;
+    border-radius: 4px;
+    color: white;
+    height: 40px;
+    margin-top: 22px;
+    margin-right: 8px;
+}
+
+.button-save-alert {
+    background-color: green;
+}
+
+.button-save-alert:hover {
+    background-color: rgb(71, 99, 71);
+}
+
+.button-remove-alert {
+    background-color: red;
+}
+
+.button-remove-alert:hover {
+    background-color: rgb(224, 97, 97);
+}
+
+#btn-plus {
+    border: none;
+}
+
+#img-plus {
+    width: 25px;
+    height: 25px;
+}
