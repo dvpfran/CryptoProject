@@ -85,6 +85,21 @@ function handlersBarraPesquisa() {
     barraPesquisa.addEventListener("keyup", async (e) => {
         isKeyDown = false;
         actualWord = e.target.value;
+
+        if (e.key === "Enter") {
+            const searchCoin = allCoins.filter(x => 
+                x.id == barraPesquisa.value || 
+                x.symbol == barraPesquisa.value || 
+                x.name == barraPesquisa.value);
+            
+            if (searchCoin.length > 0)    {
+                    window.open(`details.html?moeda=${searchCoin[0].id}`);
+            }
+            else {
+                alert("A moeda introduzida não é válida");
+            }
+        }
+
     });
 
     barraPesquisa.addEventListener("focus", () => {
